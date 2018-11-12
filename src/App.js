@@ -1,10 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Route, Switch  } from "react-router-dom"
-import logo from './logo.svg';
 import landingPage from "../src/pages/landingPage"
-import setupProject from "../src/pages/setupProject"
-import project from "../src/pages/project"
-import './App.css';
+import Nav from "./components/Nav"
+import noMatch from "./pages/noMatch"
 
 const App = () => (
     <Router>
@@ -12,9 +10,8 @@ const App = () => (
         <Nav />
         <Switch>
           <Route exact path="/" component={landingPage} />
-          <Route exact path="/project" component={setupProject} />
-          <Route exact path="/project/:id" component={project} />
-          <Route component={NoMatch} />
+
+          <Route component={noMatch} />
         </Switch>
       </div>
     </Router>
