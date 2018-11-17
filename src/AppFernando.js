@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Platform, Text, View, StyleSheet } from 'react-native';
-import {MapView, Constants, Location, Permissions } from 'expo';
+import { MapView, Constants, Location, Permissions } from 'expo';
 
 export default class App extends Component {
   state = {
@@ -37,22 +37,52 @@ export default class App extends Component {
       text = this.state.errorMessage;
     } else if (this.state.location) {
       text = JSON.stringify(this.state.location);
-      console.log(this.state.location)
+
     }
-//to get the stamp just remove google mapviw.
+    //to get the stamp just remove google mapviw.
     return (
       <View style={styles.container}>
         <Text style={styles.paragraph}>{text}</Text>
-      </View>,
-       <MapView
-       style={{ flex: 1 }}
-       initialRegion={{
-         latitude: 33.8897555,
-         longitude:-117.9893187,
-         latitudeDelta: 0.0922,
-         longitudeDelta: 0.0421,
-       }}
-     />
+      </View> ,
+      <MapView
+        style={{ flex: 1 }}
+        initialRegion={{
+          latitude: 33.8897555,
+          longitude: -117.9893187,
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0421,
+        }}>
+        <MapView.Marker
+          coordinate={{
+            latitude: 33.8897555,
+            longitude: -117.9893187
+          }}
+          draggable
+          onDragEnd={
+            (e) =>
+
+  console.log(e.nativeEvent)
+
+
+          }
+        description={MapView.Marker.description}
+        />
+      </MapView>
+
+
+
+      /* <MapView
+    region={this.state.region}
+    onRegionChange={this.onRegionChange}
+  >
+    {this.state.markers.map(marker => (
+      <Marker
+        coordinate={marker.latlng}
+        title={marker.title}
+        description={marker.description}
+      />
+    ))}
+  </MapView>*/
     );
   }
 }
