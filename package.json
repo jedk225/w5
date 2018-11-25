@@ -26,7 +26,8 @@
   "dependencies": {
     "express": "^4.16.4",
     "if-env": "^1.0.4",
-    "mongoose": "^5.3.12"
+    "mongoose": "^5.3.12",
+    "react-native-submit-button": "^1.0.5"
   },
   "devDependencies": {
     "concurrently": "^4.0.1",

@@ -1,13 +1,22 @@
 import React, { Component } from 'react';
-import { Platform, Text, View, StyleSheet } from 'react-native';
+import { Platform, Text, View, StyleSheet, Button } from 'react-native';
 import { MapView, Constants, Location, Permissions } from 'expo';
+import Api from './utils/API'
+//import SubmitButton from 'react-native-submit-button';
+
+
+
 
 export default class App extends Component {
   state = {
     location: null,
     errorMessage: null,
   };
+ handleSubmit = () =>{
+ Api.submitForm(this.state.location)
 
+
+ }
 
   componentWillMount() {
     if (Platform.OS === 'android' && !Constants.isDevice) {
@@ -39,50 +48,59 @@ export default class App extends Component {
       text = JSON.stringify(this.state.location);
 
     }
+
+
+    console.log(this.state.location);
     //to get the stamp just remove google mapviw.
     return (
-      <View style={styles.container}>
-        <Text style={styles.paragraph}>{text}</Text>
-      </View> ,
-      <MapView
-        style={{ flex: 1 }}
-        initialRegion={{
-          latitude: 33.8897555,
-          longitude: -117.9893187,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
-        }}>
-        <MapView.Marker
-          coordinate={{
-            latitude: 33.8897555,
-            longitude: -117.9893187
-          }}
-          draggable
-          onDragEnd={
-            (e) =>
+      <View style={{ flex: 1 }}>
 
-  console.log(e.nativeEvent)
+        {this.state.location && (
+          <MapView
+            style={{ flex: 1 }}
+            initialRegion={{
+              latitude: this.state.location.coords.latitude,
+              longitude: this.state.location.coords.longitude,
+              latitudeDelta: 0.0922,
+              longitudeDelta: 0.0421
+            }}
 
-
-          }
-        description={MapView.Marker.description}
-        />
-      </MapView>
+          >
+            <MapView.Marker.Animated
+              ref={marker => { this.marker = marker }}
+              coordinate={this.state.coordinate}
+              onRegionChange={this.onRegionChange}
+              coordinate={{
+                latitude: this.state.location.coords.latitude,
+                longitude: this.state.location.coords.longitude,
+                timestamp: this.state.location
 
 
+              }}
+              draggable
+              onDragEnd={e => console.log(e.nativeEvent, this.timestamp)}
+              description={MapView.Marker.description}
+  />
 
-      /* <MapView
-    region={this.state.region}
-    onRegionChange={this.onRegionChange}
-  >
-    {this.state.markers.map(marker => (
-      <Marker
-        coordinate={marker.latlng}
-        title={marker.title}
-        description={marker.description}
-      />
-    ))}
-  </MapView>*/
+
+          </MapView>
+
+
+        )}
+        <View style={{ height: 50 }}>
+              
+          <Button title = "submit location"
+          onPress ={this.handleSubmit} 
+           
+            />
+
+        </View>
+
+
+      </View>
+
+
+
     );
   }
 }
@@ -90,8 +108,8 @@ export default class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    //alignItems: 'center',
+    //justifyContent: 'center',
     paddingTop: Constants.statusBarHeight,
     backgroundColor: '#ecf0f1',
   },
@@ -101,3 +119,5 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 });
+
+
