@@ -11,7 +11,9 @@ export default {
         //if ofrm data received value
         //post into database since no db then
         console.log(formData)
-        return Promise.resolve()
+        return axios.post("/api/App", formData)
+        
+        //return Promise.resolve()
     }
 
 };
