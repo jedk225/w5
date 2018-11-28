@@ -6,8 +6,12 @@
 import axios from "axios";
 
 export default {
-    search: function(query) {
-        return axios.get();
-      }
+    // Gets all Maps
+    submitForm: (formData) => {
+        //if ofrm data received value
+        //post into database since no db then
+        console.log(formData)
+        return Promise.resolve()
+    }
 
 };

@@ -1,13 +1,62 @@
 import React, { Component } from 'react';
-import { Platform, Text, View, StyleSheet, Button } from 'react-native';
+import { Platform, Text, View, StyleSheet, Button, TextInput } from 'react-native';
 import { MapView, Constants, Location, Permissions } from 'expo';
-import Api from './utils/API'
+//import {
+ // createStackNavigator,
+ // createBottomTabNavigator
+//} from 'react-navigation';
+import Inputs from './views/inputs.js'
+import Api from './utils/API';
 //import SubmitButton from 'react-native-submit-button';
+
+/*
+import Home from './views/Home'
+import Favorites from './views/Favorites'
+import Details from './views/Details'
+
+const HomeStack = createStackNavigator({
+  HomeList: {
+    screen: Home,
+    navigationOptions: {
+      title: 'Search Movies'
+    }
+  },
+  Details: {
+    screen: Details,
+    navigationOptions: ({ navigation }) => ({
+      title: `${navigation.state.params.title}`
+    })
+  }
+})
+
+const FavoritesStack = createStackNavigator({
+  FavoritesList: {
+    screen: Favorites,
+    navigationOptions: {
+      title: 'Favorites'
+    }
+  },
+  FavoritesDetails: {
+    screen: Details,
+    navigationOptions: ({ navigation }) => ({
+      title: `${navigation.state.params.title}`
+    })
+  }
+})
+
+export default createBottomTabNavigator({
+  Home: { screen: HomeStack },
+  Favorites: { screen: FavoritesStack }
+})*/
 
 
 
 
 export default class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { text: 'Useless Placeholder' };
+  }
   state = {
     location: null,
     errorMessage: null,
@@ -19,7 +68,7 @@ export default class App extends Component {
  Api.saveLocation(this.state.location);
 
 
- }
+  }
 
   componentWillMount() {
     if (Platform.OS === 'android' && !Constants.isDevice) {
@@ -77,13 +126,13 @@ export default class App extends Component {
                 latitude: this.state.location.coords.latitude,
                 longitude: this.state.location.coords.longitude,
                 timestamp: this.state.location
-
-
               }}
+              // image={require('../assets/pin.png')}
+
               draggable
               onDragEnd={e => console.log(e.nativeEvent, this.timestamp)}
               description={MapView.Marker.description}
-  />
+            />
 
 
           </MapView>
@@ -91,13 +140,19 @@ export default class App extends Component {
 
         )}
         <View style={{ height: 50 }}>
-              
-          <Button title = "submit location"
-          onPress ={this.handleSubmit} 
-           
-            />
+
+          <Button title="submit location"
+            onPress={this.handleSubmit}
+
+          />
+
+
 
         </View>
+        <View style={{ height: -200 }}>
+        <Inputs />
+        </View>
+
 
 
       </View>

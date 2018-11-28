@@ -9,12 +9,12 @@ import { Constants } from "expo";
 
 const { manifest } = Constants;
 const apiHost =
-  typeof manifest.packagerOpts === `object` && manifest.packagerOpts.dev
-    ? manifest.debuggerHost
-        .split(`:`)
-        .shift()
-        .concat(`:3030`)
-    : `api.example.com`;
+    typeof manifest.packagerOpts === `object` && manifest.packagerOpts.dev
+        ? manifest.debuggerHost
+            .split(`:`)
+            .shift()
+            .concat(`:3030`)
+        : `api.example.com`;
 
 export default {
     // Gets all Maps
@@ -42,15 +42,15 @@ export default {
             latitude: latitude,
             longitude: longitude,
             date: date
-          })
-          .then(function (response) {
-            console.log(response.data);
-            console.log("Saved to Database");
-          })
-          .catch(function (error) {
-            console.log("error reached")
-            console.log(error);
-          });
+        })
+            .then(function (response) {
+                console.log(response.data);
+                console.log("Saved to Database");
+            })
+            .catch(function (error) {
+                console.log("error reached")
+                console.log(error);
+            });
 
 
     }
