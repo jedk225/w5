@@ -43,8 +43,8 @@ class Maps extends Component {
     event.preventDefault();
     if (this.state.latitude && this.state.latitude) {
       API.saveMap({
-        title: this.state.latitude,
-        author: this.state.longitude
+        latitude: this.state.latitude,
+        longitude: this.state.longitude
       })
         .then(res => this.loadMaps())
         .catch(err => console.log(err));
