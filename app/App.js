@@ -12,8 +12,11 @@ export default class App extends Component {
     location: null,
     errorMessage: null,
   };
- handleSubmit = () =>{
- Api.submitForm(this.state.location)
+
+ handleSubmit = () => {
+ //Api.submitForm(this.state.location);
+
+ Api.saveLocation(this.state.location);
 
 
  }
