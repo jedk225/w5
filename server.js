@@ -22,7 +22,7 @@ const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/w5";
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 
 
-app.use(express.static(path.join(__dirname, 'build')));
+//app.use(express.static(path.join(__dirname, 'build')));
 
 // app.get('/ping', function (req, res) {
 //  return res.send('pong');
