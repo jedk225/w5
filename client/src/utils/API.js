@@ -1,5 +1,7 @@
-// import axios from "axios"
+import axios from "axios";
 
-// export default{
-
-// }
+export default {
+    createProject: function(projectData) {
+        return axios.post("/api/projects", projectData)
+    }
+}

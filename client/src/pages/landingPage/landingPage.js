@@ -16,7 +16,7 @@ render(){
         <Row>
           <Col size="md-12">
             <Jumbotron>
-              <Link to={"/setupProject"}>
+              <Link to={"/setup"}>
               <h1>Sign Up for W5 project!</h1>
               </Link>
             </Jumbotron>
