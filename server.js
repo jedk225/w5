@@ -13,10 +13,13 @@ app.use(express.json())
 if (process.env.NODE_ENV === "production"){
   app.use(express.static("client/build"))
 }
+
+// Add routes, both API and view
 app.use(routes);
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/w5")
-
+// Connect to the Mongo DB
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/w5";
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 
 
 app.listen(PORT, function(){
