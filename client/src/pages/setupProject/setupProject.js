@@ -30,8 +30,7 @@ render(){
         </Row>
         <Row>
         <Col size="md-12">
-        <h1>{this.state.projectName}</h1>
-        <h1>{this.state.projectEmail}</h1>
+
 
         <Form />
         <h1>OptLocation: </h1>

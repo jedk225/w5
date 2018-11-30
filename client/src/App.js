@@ -13,6 +13,7 @@ const App = () => {
       <Switch>
         <Route exact path="/" component={landingPage} />
         <Route exact path="/setup" component={SetupProject} />
+        <Route path="/lookthisup" component={SetupProject} />
         <Route component={noMatch} />
       </Switch>
     </div>
@@ -21,5 +22,6 @@ const App = () => {
 }
 
 export default App;
+
 
 

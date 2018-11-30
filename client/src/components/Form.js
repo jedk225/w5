@@ -5,64 +5,50 @@ class Form extends Component {
 
     constructor(props){
         super(props)
+
         this.state = {
             projectName: "",
             primaryEmail: "",
-                optLocation: false,
-                optTimeStamp: false,
-                optPhoto: false,
-                optText: false
+            projectSlug: "",
+            password: "",
+            projectDescription: ""    
         }
-        this.onChange = this.onChange.bind(this)
-        this.toggleOption = this.toggleOption.bind(this)
-        this.onSubmit = this.onSubmit.bind(this)
+        this.onChange = this.onChange.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
+        this.nameSlug = this.nameSlug.bind(this);
     }
 
     onChange(event){
         event.preventDefault();
-        console.log(event.target.name);
-        this.setState({[event.target.name] : event.target.value})  
+        this.setState({[event.target.name] : event.target.value})
+        const Name = this.state.projectName;
+        const slug = this.nameSlug(Name);
+        this.setState({projectSlug: slug})  
     }
 
-    toggleOption(e){
-        const toggle = e.target.checked;
-        const name = e.target.value
-
-        console.log(toggle + "<-toggle")
-        console.log(name + "<-name")
-        if(!this.state[name]){
-            console.log("toggle was true")
-            this.setState({[name] : true })
-            // this.state.selectedOptions.push(name)
-        } else{
-            // document.getElementById(e.target.id).checked = false
-            console.log("toggle was false")
-            this.setState({[name] : false })
-
-        }
-        console.log(this.state.selectedOptions);
-    }
-    
+    nameSlug(text){
+        return text.toString().toLowerCase()
+              .replace(/\s+/g, '-')           // Replace spaces with -
+              .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+              .replace(/\-\-+/g, '-')         // Replace multiple - with single -
+              .replace(/^-+/, '')             // Trim - from start of text
+              .replace(/-+$/, '');            // Trim - from end of text
+          
+    }    
     
     onSubmit(event){
         event.preventDefault()
-        const arr = []
-        console.log(this.state.selectedOptions)
-        if(this.state.optLocation) arr.push("optLocation")
-        if(this.state.optTimeStamp) arr.push("optTimeStamp")
-        if(this.state.optPhoto) arr.push("optPhoto")
-        if(this.state.optText) arr.push("optText")
-
+        
         const newProject = {
             projectName: this.state.projectName,
+            projectSlug: this.state.projectSlug,
             primaryEmail: this.state.primaryEmail,
-            optLocation: this.state.optLocation,
-            optTimeStamp: this.state.optTimeStamp,
-            optPhoto: this.state.optPhoto,
-            optText: this.state.optText,
-            options: arr
+            password: this.state.password,
+            projectDescription: this.state.projectDescription
         }
-        // console.log(newProject);
+
+        console.log(newProject)
+
         API.createProject(newProject)
         .then( res => alert(res.data.id))
         .catch( err => console.error(err) )
@@ -70,6 +56,10 @@ class Form extends Component {
 
     render(){
         return(
+    <div>
+        <h1>Project Name: {this.state.projectName}</h1>
+        <h2>Project Slug: {this.state.projectSlug}</h2>
+
         <form>
             <div className="form-group">
                 <label htmlFor="projectName">Project Name</label>
@@ -81,39 +71,18 @@ class Form extends Component {
             </div>
             <div className="form-group">
                 <label htmlFor="pwd">Password:</label>
-                <input type="password" className="form-control" id="pwd" />
+                <input type="password" onChange={this.onChange} name="password" className="form-control" id="pwd" />
             </div>
-            <div className="form-check">
-                <input className="form-check-input" type="radio" name="optLocation" id="location" value="optLocation" onClick={this.toggleOption} checked={this.state.optLocation}  />
-                <label className="form-check-label" htmlFor="location">
-                    Location
-                </label>
+            <div className="form-group">
+                <label htmlFor="projectDescription">Project Description:</label>
+                <input type="text" onChange={this.onChange} name="projectDescription" className="form-control" id="projectDescription" />
             </div>
-
-             <div className="form-check">
-                <input className="form-check-input" type="radio" name="timeStamp" id="timeStamp" value="optTimeStamp" onClick={this.toggleOption} checked={this.state.optTimeStamp}/>
-                <label className="form-check-label" htmlFor="timeStamp">
-                    TimeStamp
-                </label>
-            </div>
-
-            <div className="form-check">
-            <input className="form-check-input" type="radio" name="cameraInput" id="cameraInput" value="optPhoto" onClick={this.toggleOption} checked={this.state.optPhoto}/>
-            <label className="form-check-label" htmlFor="cameraInput">
-                Photo Input
-            </label>
-            </div>
-
-            <div className="form-check">
-            <input className="form-check-input" type="radio" name="textBox" id="textBox" value="optText" onClick={this.toggleOption}
-            checked={this.state.optText}/>
-            <label className="form-check-label" htmlFor="textBox">
-                Text Box
-            </label>
-        </div> 
-
+            
             <button type="submit" className="btn btn-primary" onClick={this.onSubmit}>Submit</button>
-            </form>)
+        </form>
+    </div>
+    )
+
             }
          
 }
