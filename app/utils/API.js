@@ -25,23 +25,32 @@ export default {
         return Promise.resolve()
     },
     // Saves a location to the database
-    saveLocation: (mapData) => {
+    saveLocation: (mapData, comments, photo, email, projectName) => {
         let latitude = mapData.coords.latitude;
         let longitude = mapData.coords.longitude;
         let date = new Date(mapData.timestamp);
         let endPoint = "http://" + apiHost + "/api/maps/"
-
+        
         console.log("\n")
         console.log(`Latitude: ${latitude}`)
         console.log(`Longitude: ${longitude}`)
         console.log(`Timestamp: ${date}`)
-        console.log(`Endpoint ${endPoint}`);
+        console.log(`Endpoint ${endPoint}`)
+        console.log(`comments: ${comments}`)
+        console.log(`photo ${photo}`);
+        console.log(`email: ${email}`)
+        console.log(`project ${projectName}`);
         //return axios.post("/", mapData);
 
         axios.post(endPoint, {
             latitude: latitude,
             longitude: longitude,
-            date: date
+            date: date,
+            comments: comments,
+            photo: photo,
+            email: email,
+            projectName: projectName
+
         })
             .then(function (response) {
                 console.log(response.data);
