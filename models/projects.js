@@ -6,15 +6,12 @@ const Schema = mongoose.Schema;
 const multer = require('multer');
 
 const projectSchema = new Schema ({
-    projectName: { type: String },
-    primaryEmail: { type: String },
-    options: {type: Array },
-    optLocation: { type: Boolean},
-    optTimeStamp: { type: Boolean},
-    // timestamp: { type: Date, default: Date.now},
-    optText: {type: Boolean},
-    optPhoto: { type: Boolean }
-    // photo: { data: Buffer, contentType: String }    
+    projectName: { type: String, required: true },
+    primaryEmail: { type: String, required: true },
+    projectDescription: { type: String, required: true },
+    password: { type: String, required: true },
+    projectSlug: { type: String, required: true, unique: true }
+     
 });
 
 const Project = mongoose.model("Project", projectSchema);

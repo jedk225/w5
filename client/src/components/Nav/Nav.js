@@ -5,6 +5,8 @@ const Nav = () => (
     <a className="navbar-brand" href="/">
       W5
     </a>
+    <input className="project" placeholder="Project Name"/>
+    <input className="password" placeholder="Password" />
   </nav>
 );
 

@@ -32,7 +32,7 @@ render(){
         <Col size="md-12">
 
 
-        <Form />
+        <Form updateProjectList={this.props.updateProjectList} />
         <h1>OptLocation: </h1>
         <h2>{this.state.optLocation}</h2>
       </Col>

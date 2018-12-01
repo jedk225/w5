@@ -11,12 +11,15 @@ class Form extends Component {
             primaryEmail: "",
             projectSlug: "",
             password: "",
-            projectDescription: ""    
+            projectDescription: "",
+            projects: [props.projects]    
         }
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.nameSlug = this.nameSlug.bind(this);
     }
+
+    
 
     onChange(event){
         event.preventDefault();
@@ -28,12 +31,11 @@ class Form extends Component {
 
     nameSlug(text){
         return text.toString().toLowerCase()
-              .replace(/\s+/g, '-')           // Replace spaces with -
-              .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
-              .replace(/\-\-+/g, '-')         // Replace multiple - with single -
-              .replace(/^-+/, '')             // Trim - from start of text
-              .replace(/-+$/, '');            // Trim - from end of text
-          
+              .replace(/\s+/g, '-')
+              .replace(/[^\w\-]+/g, '')
+              .replace(/\-\-+/g, '-')
+              .replace(/^-+/, '')
+              .replace(/-+$/, '');          
     }    
     
     onSubmit(event){
@@ -48,11 +50,12 @@ class Form extends Component {
         }
 
         console.log(newProject)
-
         API.createProject(newProject)
-        .then( res => alert(res.data.id))
+        .then( res => {
+            this.props.updateProjectList(res.data)
+        })
         .catch( err => console.error(err) )
-    }
+     }
 
     render(){
         return(
