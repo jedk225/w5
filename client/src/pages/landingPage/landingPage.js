@@ -3,9 +3,9 @@ import React, { Component } from "react"
 import { Col, Row, Container } from "../../components/Grid"
 import { Link } from "react-router-dom"
 import Jumbotron from "../../components/Jumbotron"
-import { Input, TextArea, FormBtn } from "../../components/Form";
-import { List, ListItem } from "../../components/List"
-import DeleteBtn from "../../components/DeleteBtn"
+// import { Input, TextArea, FormBtn } from "../../components/Form";
+// import { List, ListItem } from "../../components/List"
+// import DeleteBtn from "../../components/DeleteBtn"
 
 class landingPage extends Component {
 
@@ -16,11 +16,23 @@ render(){
         <Row>
           <Col size="md-12">
             <Jumbotron>
-              <Link to={"/setupProject"}>
+              <Link to={"/setup"}>
               <h1>Sign Up for W5 project!</h1>
               </Link>
             </Jumbotron>
             
+          </Col>
+        </Row>
+        <Row>
+          <Col size = "md-6">
+            <Jumbotron>
+            Left Side
+            </Jumbotron>
+          </Col>
+          <Col size = "md-6">
+            <Jumbotron>
+            Right Side
+            </Jumbotron>
           </Col>
         </Row>
         </Container>
