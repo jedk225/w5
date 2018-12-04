@@ -11,6 +11,10 @@ export default {
     },
     createProject: function(projectData) {
         return axios.post("/api/projects", projectData)
+    },
+   
+    grabData: function(id) {
+        return axios.get(`/:${id}`)
     }
 
 };

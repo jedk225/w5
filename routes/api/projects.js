@@ -7,4 +7,7 @@ router.route("/")
     })
     .post(projectController.create)
 
+router.route("/:id")
+    .get(projectController.lookUpByProjectId)
+        
 module.exports = router;
