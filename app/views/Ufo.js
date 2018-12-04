@@ -139,8 +139,12 @@ export default class Ufo extends Component {
 
 
         )}
-        <View style={{ height: 50 }}>
+        <View style={{ flex: 1 }}>
 
+          <Button title="UFO SPOTTER"
+            onPress={this.handleSubmit}
+
+          />
           <Button title="UFO SPOTTER"
             onPress={this.handleSubmit}
 

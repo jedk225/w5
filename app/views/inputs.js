@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { View, Text, TouchableOpacity, TextInput, StyleSheet } from 'react-native'
+import { Button } from 'react-native-elements';
 
 
 class Inputs extends Component {
@@ -24,7 +25,17 @@ class Inputs extends Component {
   render() {
     return (
       <View style={styles.container}>
-       
+
+      <View style={styles.buttonContainer}>
+<Button
+  onPress={() =>
+    this.props.navigation.navigate('Cm')
+  }
+  title="cam"
+  color="#841584"
+/>
+
+</View>
 
         <TextInput style={styles.input}
           underlineColorAndroid="transparent"
@@ -32,6 +43,9 @@ class Inputs extends Component {
           placeholderTextColor="#9a73ef"
           autoCapitalize="none"
           onChangeText={this.handleComment} />
+
+
+
 
         <TouchableOpacity
           style={styles.submitButton}
@@ -45,10 +59,18 @@ class Inputs extends Component {
   }
 }
 export default Inputs
+/* <Button
+         title="Project Ufo!!"
+         onPress={() =>
+           this.props.navigation.navigate('Camera')
+         }/>*/
 
 const styles = StyleSheet.create({
   container: {
     paddingTop: 23
+  },
+  con: {
+    height: 400
   },
   input: {
     margin: 15,

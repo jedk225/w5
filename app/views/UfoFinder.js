@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Platform, Text, View, StyleSheet, Button, TextInput } from 'react-native';
-import { MapView, Constants, Location, Permissions } from 'expo';
+import {Alert, Platform, Text, View, StyleSheet, Button, TextInput } from 'react-native';
+import {MapView, Constants, Location, Permissions } from 'expo';
 import Inputs from './inputs.js'
 import Api from '../utils/API';
 
@@ -13,7 +13,10 @@ export default class UfoFinder extends Component {
       location: null,
       errorMessage: null,
     };
-  
+    _onPressButton() {
+      Alert.alert('Good luck on UFO hunting')
+
+    }
    handleSubmit = (comments,photo) => {
    //Api.submitForm(this.state.location);
   
@@ -91,10 +94,10 @@ export default class UfoFinder extends Component {
   
   
           )}
-          <View style={{ height: 50 }}>
+          <View style={{ flex: 1 }}>
   
             <Button title="UFO SPOTTER"
-              onPress={this.handleSubmit}
+              onPress={this._onPressButton}
   
             />
   

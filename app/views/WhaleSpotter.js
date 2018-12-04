@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Platform, Text, View, StyleSheet, Button, TextInput } from 'react-native';
+import {Alert, Platform, Text, View, StyleSheet, Button, TextInput } from 'react-native';
 import { MapView, Constants, Location, Permissions } from 'expo';
 import Inputs from './inputs.js'
 import Api from '../utils/API';
@@ -13,6 +13,9 @@ export default class WhaleSpotter extends Component {
       location: null,
       errorMessage: null,
     };
+    whalewelcome = () =>{
+      Alert.alert('Good luck on whale hunting')
+    }
   
    handleSubmit = (comments,photo) => {
    //Api.submitForm(this.state.location);
@@ -91,17 +94,17 @@ export default class WhaleSpotter extends Component {
   
   
           )}
-          <View style={{ height: 50 }}>
+          <View style={{flex: 1}}>
   
             <Button title="Whale SPOTTER"
-              onPress={this.handleSubmit}
+              onPress={this.whalewelcome}
   
             />
   
   
   
           </View>
-          <View style={{ height: -200 }}>
+          <View style={{ flex:1 }}>
           <Inputs handleSubmit={
             this.handleSubmit
           } />

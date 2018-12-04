@@ -9,8 +9,8 @@ import {
   Slider,
   Platform
 } from 'react-native';
-import GalleryScreen from './GalleryScreen';
-import isIPhoneX from 'react-native-is-iphonex';
+//import GalleryScreen from './GalleryScreen';
+//import isIPhoneX from 'react-native-is-iphonex';
 
 import {
   Ionicons,
@@ -54,7 +54,7 @@ const wbIcons = {
   incandescent: 'wb-incandescent',
 };
 
-export default class CameraScreen extends React.Component {
+export default class Cam extends React.Component {
   state = {
     flash: 'off',
     zoom: 0,

@@ -16,6 +16,8 @@
     "react-bootstrap": "^0.32.4",
     "react-dom": "^16.6.3",
     "react-native": "https://github.com/expo/react-native/archive/sdk-31.0.0.tar.gz",
+    "react-native-camera": "^1.4.3",
+    "react-native-elements": "^1.0.0-beta7",
     "react-native-maps": "^0.22.1",
     "react-native-submit-button": "^1.0.5",
     "react-navigation": "2.18.2"

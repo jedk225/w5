@@ -1,75 +1,53 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
+
+
 export default class Home extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      possibleFriends: [
-        'Ufo',
-        'Whale',
-        
-      ],
-      currentFriends: [],
-    }
-  }
 
-  addFriend = (index) => {
-    const {
-      currentProjects,
-      possibleFriends,
-    } = this.state
-
-    // Pull friend out of possibleFriends
-    const addedFriend = possibleFriends.splice(index, 1)
-
-    // And put friend in currentFriends
-    currentFriends.push(addedFriend)
-
-    // Finally, update our app state
-    this.setState({
-      currentFriends,
-      possibleFriends,
-    })
-  }
   render() {
     return (
-     
-      <View style={styles.container}>
-      
-       <Text style={styles.header}> Welcome to w5 please click on your Project. </Text>
-       
-       <View style={styles.buttonContainer}>
-       
-        <Button
-          title="Project Ufo!!"
-          onPress={() =>
-            this.props.navigation.navigate('UfoFinder')
-          }
-        /></View>
-       
-        <View style={styles.buttonContainer}>
-          <Button
-             onPress={() =>
-              this.props.navigation.navigate('WhaleSpotter')
-            }
-            title="Project Whale"
-            color="#841584"
-          />
-        </View>
-        
 
-        
-        
-      </View>
+      <View style={styles.container}>
+
+
+   <Text style={{backgroundColor: "pink",height:80,marginBottom:480,fontWeight: "bold", fontSize:18,marginLeft:2,marginRight:1}}>     Welcome to w5 please click on your Project we have We have {this.props.screenProps.currentFriends.length} Projects,
+   please add or get into your Project. </Text>
+
+
+
+<View style={{flex:1}}>
+{
+          this.props.screenProps.possibleFriends.map((friend, index) => (
+            <Button
+              key={friend}
+              title={`Add ${friend}`}
+              onPress={() =>
+                this.props.navigation.navigate('Details')
+              }
+            />
+          )
+          )
+        }
        
+
+</View>
+     
+        
+       
+
+
+
+
+      </View>
+
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-   flex: 1,
-   justifyContent: 'center',
+    flex: 1,
+    justifyContent: 'center',
   },
   buttonContainer: {
     margin: 20
@@ -79,10 +57,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between'
   },
-  header:{
-    flex:1,
-    margin: 0,
+  header: {
+    flex: 1,
+    margin: 20,
     fontWeight: "bold",
+    color: "black",
+    fontSize: 25,
+    backgroundColor: "red"
+
   }
 
 });
