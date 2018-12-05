@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text, TouchableOpacity, TextInput, StyleSheet } from 'react-native'
 import { Button } from 'react-native-elements';
-
+import { withNavigation } from 'react-navigation';
 
 class Inputs extends Component {
   state = {
@@ -29,7 +29,7 @@ class Inputs extends Component {
       <View style={styles.buttonContainer}>
 <Button
   onPress={() =>
-    this.props.navigation.navigate('Cm')
+    this.props.navigation.navigate('Cam')
   }
   title="cam"
   color="#841584"
@@ -58,7 +58,7 @@ class Inputs extends Component {
     )
   }
 }
-export default Inputs
+export default withNavigation(Inputs)
 /* <Button
          title="Project Ufo!!"
          onPress={() =>

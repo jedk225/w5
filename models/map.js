@@ -6,8 +6,8 @@ const MapSchema = new Schema({
   longitude: { type: String, required: true },
   date: { type: Date, default: Date.now },
   comments: { type: String, required: false },
-  email: { type: String, required: true },
-  photo: { type: Buffer, required: false },
+  email: { type: String, required: false },
+  photo: { type: String, required: false },
   projectName: { type: String, required: true }
 });
 
