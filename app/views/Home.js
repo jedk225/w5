@@ -14,12 +14,14 @@ export default class Home extends React.Component {
           renderItem={({ index, item }) => {
 
             return <TouchableOpacity key={index} onPress={() => this.props.navigation.navigate('ProjectForm', { item })}>
-              <Text>
-                {item.projectName}
-              </Text>
-              <Text>
-                {item.projectDescription}
-              </Text>
+              <View style= { styles.listItem }>
+                <Text>
+                  {item.projectName}
+                </Text>
+                <Text>
+                  {item.projectDescription}
+                </Text>
+              </View>
             </TouchableOpacity>;
           }}
           contentContainerStyle={{ padding: 10 }}
@@ -52,6 +54,12 @@ const styles = StyleSheet.create({
     fontSize: 25,
     backgroundColor: "red"
 
+  },
+  listItem: {
+    backgroundColor: "#cfcfcf",
+    borderBottomWidth: 1,
+    borderBottomColor: "#f0f0f0",
+    padding: 7.5
   }
 
 });

@@ -10,11 +10,13 @@ export default class App extends React.Component {
     this.state = {
       possibleProjects: [],
       currentProjects: [{
+        "key": "ufofinder will be a UID later",
         "projectName": "UFO Finder",
         "projectDescription": "ALIENS!!!!",
         "projectSlug": "ufofinder"
       },
       {
+        "key": "ufwhalespotterofinder will be a UID later",
         "projectName": "Whale Spotter",
         "projectDescription": "I love Shamu!!",
         "projectSlug": "whalespotter"

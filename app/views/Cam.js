@@ -54,6 +54,9 @@ const wbIcons = {
 };
 
 export default class CameraScreen extends React.Component {
+  static navigationOptions = {
+    "header": null
+  }
   state = {
     flash: 'off',
     zoom: 0,
@@ -172,7 +175,12 @@ export default class CameraScreen extends React.Component {
     });
     this.setState({ newPhotos: true });
 
-    this.storePicture(newLocation);
+    //VERY IMPORTANT
+    //ADD THIS BACK IN SOMEWHERE LATER!!! IT SAVES OUR PIC TO CLOUDINARY!!!!!!!
+    //this.storePicture(newLocation);
+
+    this.props.navigation.goBack()
+
 
     console.log("\n-----------------------");
     console.log(photo);
