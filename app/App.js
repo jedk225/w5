@@ -8,28 +8,35 @@ export default class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      possibleFriends: [
-        'Add Pojects'
-       ],
-      currentFriends: [],
+      possibleProjects: [],
+      currentProjects: [{
+        "projectName": "UFO Finder",
+        "projectDescription": "ALIENS!!!!",
+        "projectSlug": "ufofinder"
+      },
+      {
+        "projectName": "Whale Spotter",
+        "projectDescription": "I love Shamu!!",
+        "projectSlug": "whalespotter"
+      }]
     }
   }
-  addFriend = (index) => {
+  addProject = (index) => {
     const {
-      currentFriends,
-      possibleFriends,
+      currentProjects,
+      possibleProjects,
     } = this.state
 
-    // Pull friend out of possibleFriends
-    const addedFriend = possibleFriends.splice(index, 1)
+    // Pull Project out of possibleProjects
+    const addedProject = possibleProjects.splice(index, 1)
 
-    // And put friend in currentFriends
-    currentFriends.push(addedFriend)
+    // And put Project in currentProjects
+    currentProjects.push(addedProject)
 
     // Finally, update our app state
     this.setState({
-      currentFriends,
-      possibleFriends,
+      currentProjects,
+      possibleProjects,
     })
   }
 
@@ -37,9 +44,9 @@ export default class App extends React.Component {
     return (
    <AppNavigator
           screenProps={ {
-            currentFriends: this.state.currentFriends,
-            possibleFriends: this.state.possibleFriends,
-            addFriend: this.addFriend,
+            currentProjects: this.state.currentProjects,
+            possibleProjects: this.state.possibleProjects,
+            addProject: this.addProject,
           } }
         />
     );

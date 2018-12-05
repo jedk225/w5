@@ -9,8 +9,7 @@ import {
   Slider,
   Platform
 } from 'react-native';
-//import GalleryScreen from './GalleryScreen';
-//import isIPhoneX from 'react-native-is-iphonex';
+import axios from 'axios';
 
 import {
   Ionicons,
@@ -54,7 +53,7 @@ const wbIcons = {
   incandescent: 'wb-incandescent',
 };
 
-export default class Cam extends React.Component {
+export default class CameraScreen extends React.Component {
   state = {
     flash: 'off',
     zoom: 0,
@@ -115,6 +114,47 @@ export default class Cam extends React.Component {
 
   toggleFaceDetection = () => this.setState({ faceDetecting: !this.state.faceDetecting });
 
+
+
+
+
+  storePicture(uri) {
+    console.log("Attempting to store picture");
+    const CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/w5/image/upload";
+    const CLAUDINARY_UPLOAD_PRESET = "gslrjwvq";
+
+    let uriParts = uri.split('.');
+    let fileType = uriParts[uriParts.length - 1];
+
+    let formData = new FormData();
+    formData.append('file', {
+      uri,
+      name: `photo.${fileType}`,
+      type: `image/${fileType}`,
+    });
+
+    formData.append('upload_preset', CLAUDINARY_UPLOAD_PRESET);
+
+    axios({
+      url: CLOUDINARY_URL,
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      data: formData
+    }).then(function (res) {
+      console.log("Successfuly stored picture")
+      console.log(res.data.secure_url)
+
+    }).catch(function (err) {
+      console.log("Failed to store pictures")
+      console.log(err)
+    })
+  }
+
+
+
+
   takePicture = () => {
     if (this.camera) {
       this.camera.takePictureAsync({ onPictureSaved: this.onPictureSaved });
@@ -124,11 +164,15 @@ export default class Cam extends React.Component {
   handleMountError = ({ message }) => console.error(message);
 
   onPictureSaved = async photo => {
+    const newLocation = `${FileSystem.documentDirectory}photos/${Date.now()}.jpg`
+
     await FileSystem.moveAsync({
       from: photo.uri,
-      to: `${FileSystem.documentDirectory}photos/${Date.now()}.jpg`,
+      to: newLocation,
     });
     this.setState({ newPhotos: true });
+
+    this.storePicture(newLocation);
 
     console.log("\n-----------------------");
     console.log(photo);
@@ -270,9 +314,7 @@ export default class Cam extends React.Component {
   renderBottomBar = () =>
     <View
       style={styles.bottomBar}>
-      <TouchableOpacity style={styles.bottomButton} onPress={this.toggleMoreOptions}>
-        <Octicons name="kebab-horizontal" size={30} color="white" />
-      </TouchableOpacity>
+
       <View style={{ flex: 0.4 }}>
         <TouchableOpacity
           onPress={this.takePicture}
@@ -281,12 +323,7 @@ export default class Cam extends React.Component {
           <Ionicons name="ios-radio-button-on" size={70} color="white" />
         </TouchableOpacity>
       </View>
-      <TouchableOpacity style={styles.bottomButton} onPress={this.toggleView}>
-        <View>
-          <Foundation name="thumbnails" size={30} color="white" />
-          {this.state.newPhotos && <View style={styles.newPhotosDot} />}
-        </View>
-      </TouchableOpacity>
+
     </View>
 
   renderMoreOptions = () =>
@@ -380,7 +417,7 @@ const styles = StyleSheet.create({
     paddingTop: Constants.statusBarHeight / 2,
   },
   bottomBar: {
-    paddingBottom: isIPhoneX ? 25 : 5,
+    paddingBottom: 5,
     backgroundColor: 'transparent',
     alignSelf: 'flex-end',
     justifyContent: 'space-between',
