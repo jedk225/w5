@@ -16,7 +16,7 @@ class Inputs extends Component {
 
   handleComment = (text) => {
     this.setState({ comment: text })
-    console.log(text, "hereee")
+   // console.log(text, "hereee")
   }
 
   success = (comment) => {

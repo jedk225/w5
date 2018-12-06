@@ -1,26 +1,37 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, FlatList, TouchableOpacity } from 'react-native';
 
-
+import { Header } from 'react-native-elements';
 export default class Home extends React.Component {
 
   render() {
     return (
 
-      <View style={styles.container}>
 
+
+
+      <View style={styles.container}>
+        <View style={{ flex: 1 }}>
+          <Header
+          //  leftComponent={{ icon: 'menu', color: '#fff' }}
+            centerComponent={{ text: 'W5 Platform solutions', style: { color: '#fff' } }}
+         //   rightComponent={{ icon: 'home', color: '#fff' }}
+          />
+
+        </View>
         <FlatList
           data={this.props.screenProps.currentProjects}
           renderItem={({ index, item }) => {
 
             return <TouchableOpacity key={index} onPress={() => this.props.navigation.navigate('ProjectForm', { item })}>
-              <View style= { styles.listItem }>
+              <View style={styles.listItem}>
                 <Text>
                   {item.projectName}
                 </Text>
                 <Text>
                   {item.projectDescription}
                 </Text>
+
               </View>
             </TouchableOpacity>;
           }}

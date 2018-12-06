@@ -125,7 +125,8 @@ export default class CameraScreen extends React.Component {
     console.log("Attempting to store picture");
     const CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/w5/image/upload";
     const CLAUDINARY_UPLOAD_PRESET = "gslrjwvq";
-
+    //"gslrjwvq"  jed claudi  xewk1otu
+    //"https://api.cloudinary.com/v1_1/w5/image/upload"   https://api.cloudinary.com/v1_1/fr7/image/upload
     let uriParts = uri.split('.');
     let fileType = uriParts[uriParts.length - 1];
 

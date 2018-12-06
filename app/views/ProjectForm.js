@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { Alert, Platform, Text, View, StyleSheet, Button, TextInput } from 'react-native';
 import { MapView, Constants, Location, Permissions } from 'expo';
-import Inputs from './inputs.js'
+import Inputs from './inputs.js';
 import Api from '../utils/API';
+import { Header, Avatar } from 'react-native-elements';
+
 
 export default class ProjectForm extends Component {
   constructor(props) {
@@ -57,14 +59,26 @@ export default class ProjectForm extends Component {
     }
 
 
-    console.log(this.state.location);
+    //consoles soon as u page loads console.log(this.state.location);
     //to get the stamp just remove google mapviw.
 
-    const {item} = this.props.navigation.state.params
+    const { item } = this.props.navigation.state.params
 
     return (
+
+
       <View style={{ flex: 1 }}>
 
+        <View style={{ flex: .30 }}>
+
+          <Header
+            leftComponent={{ icon: 'menu', color: '#fff' }
+            }
+            centerComponent={item.projectName}
+            rightComponent={{ icon: 'home', color: '#fff' }}
+
+          />
+        </View>
         {this.state.location && (
           <MapView
             style={{ flex: 1 }}
@@ -97,16 +111,7 @@ export default class ProjectForm extends Component {
 
 
         )}
-        <View style={{ flex: 1 }}>
 
-          <Button title= {item.projectName}
-            onPress={this.welcome}
-
-          />
-
-
-
-        </View>
         <View style={{ flex: 1 }}>
           <Inputs handleSubmit={
             this.handleSubmit
