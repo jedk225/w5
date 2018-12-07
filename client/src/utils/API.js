@@ -14,7 +14,15 @@ export default {
     },
    
     grabData: function(id) {
-        return axios.get(`/:${id}`)
+        console.log("Got to utils/API", id)
+        let endPoint = "/" + id;
+        console.log(endPoint, "<--endPoint")
+        return axios.get(endPoint)
+        // .then( res => {
+        //     console.log(res, "res")
+        //     return res
+        // })
+        // .catch( err => console.error(err))
     }
 
 };

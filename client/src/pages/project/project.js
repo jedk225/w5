@@ -1,44 +1,50 @@
 import React, { Component } from "react"
 import { Col, Row, Container } from "../../components/Grid"
 import Jumbotron from "../../components/Jumbotron"
-import axios from "axios";
+import API from "../../utils/API"
+
 
 class Project extends Component {
 
   constructor(props){
         super(props)
         this.state = {
-            projectName: "Project 1",
-            entries: [{name: "entry1",
-                        timeStamp: "wrong o'clock",
-                        location: "Who knows"},
-                    {name: "entry2",
-                    timeStamp: "now",
-                    location: "ever"}]
+            projectName: this.props.match.params.id,
+            entries: []
         }
     } 
 
   componentDidMount(){
       try{
-       //1 - make an API call w/ axios.
-       API.grabData(projectId)
+        let ProjectName = this.props.match.params.id
+        console.log(ProjectName, "try successful")
+        //1 - make an API call w/ axios.
+       API.grabData(ProjectName)
        .then( res => {
+           console.log("got the response to project.js")
            console.log(res)
+           this.setState({entries: res.data})
+           
+       })
+       .then( res => {
+           console.log("2nd Then")
+           console.log(this.state.entries)
        })
       }
       catch(err){
           console.error(err)
       } 
       }
-  }
+
 
   render(){
     console.log(this.props.match.params.id)
+    let ProjectName = this.props.match.params.id
     return(
       <Container fluid>
         <Row>
           <Col size="md-12">
-          <Jumbotron>{this.state.project}
+          <Jumbotron>{ProjectName}
           </Jumbotron>
           </Col>
         </Row>
@@ -46,39 +52,58 @@ class Project extends Component {
       </Container>
     )
   }
-
 }
 
 const Entries = (props) =>{ 
     return(
+
         <Row>
             <Col size="md-12">
-                <ol>
-                {props.details.entries.length === 0 && <p>"No Entries for this Project"</p>}
-                {props.details.entries.map( (entry) => (
-                    <Entry
-                        key={entry.name}
-                        entryName={entry.name}
-                        entryTime={entry.timeStamp}
-                        entryLocation={entry.location}
-                    />
-                ))}
-                </ol>
+            {props.details.entries.length === 0 && <p>"No Entries for this Project"</p>}
+            <table className="table">
+            <thead>
+              <tr>
+                <th scope="col">id</th>
+                <th scope="col">date</th>
+                <th scope="col">location</th>
+                <th scope="col">comment</th>
+              </tr>
+            </thead>
+            <tbody>
+            {props.details.entries.map( (entry) => (
+                <Entry
+                    key={entry._id}
+                    uniqueName={entry._id}
+                    entryName={entry.projectName}
+                    entryTime={entry.timeStamp}
+                    entryLocation={entry.coordinates[0] + ", " + entry.coordinates[1]}
+                    text={entry.text}
+                />
+            ))}
+            </tbody>
+          </table>
+
+
+           
             </Col>
         </Row>
     )
 }
 
+
+
 const Entry = (props) =>{
+    console.log(props.entryTime, "<--entryTime")
+    const date = new Date(props.entryTime).toString()
+    console.log(date, "<--date")
+
     return(
-        <div>
-            <li><h1>{props.entryName}</h1>
-            <span />{props.entryTime}
-            <span />{props.entryLocation}
-            <br />
-            {props.entryDescription}
-            </li>
-        </div>
+        <tr>
+            <td>{props.uniqueName}</td>
+            <td>{date}</td>
+            <td>{props.entryLocation}</td>
+            <td>{props.text}</td>
+        </tr>
     )
 
 }

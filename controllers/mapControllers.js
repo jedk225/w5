@@ -3,10 +3,14 @@ const db = require("../models");
 // Defining methods for the MapsController
 module.exports = {
   findAll: function(req, res) {
+    console.log("got to FindAll")
+    console.log(req.params.id)
     db.Map
-      .find(req.query)
+      .find({projectName: req.params.id})
       .sort({ date: -1 })
-      .then(dbModel => res.json(dbModel))
+      .then(dbModel => {
+        console.log(dbModel);
+        res.json(dbModel)})
       .catch(err => res.status(422).json(err));
   },
   findById: function(req, res) {
