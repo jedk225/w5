@@ -10,9 +10,12 @@ import './landingPage.css';
 class landingPage extends Component {
 
 
+
+
   render() {
     return (
       <Container fluid>
+
         <Row>
           <Col size="md-12">
             <Jumbotron bgURL="/images/whale.jpg">
