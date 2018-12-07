@@ -24,9 +24,11 @@ class Form extends Component {
     onChange(event){
         event.preventDefault();
         this.setState({[event.target.name] : event.target.value})
-        const Name = event.target.value;
-        const slug = this.nameSlug(Name);
-        this.setState({projectSlug: slug})  
+        if(event.target.name = "projectName"){
+            const Name = event.target.value;
+            const slug = this.nameSlug(Name);
+            this.setState({projectSlug: slug}) 
+        } 
     }
 
     nameSlug(text){

@@ -49,7 +49,7 @@ updateProjectList = (project) => {
       <Switch>
         <Route exact path="/" component={landingPage} />
         <Route exact path="/setup" render={ () => <SetupProject updateProjectList={this.updateProjectList} />} />
-        <Route path="/:id" component={Project} />
+        <Route path="/:id" render={props => <Project {...props} /> } />
         <Route component={noMatch} />
       </Switch>
     </div>
