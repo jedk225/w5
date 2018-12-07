@@ -18,11 +18,11 @@ export default {
         let endPoint = "/" + id;
         console.log(endPoint, "<--endPoint")
         return axios.get(endPoint)
-        // .then( res => {
-        //     console.log(res, "res")
-        //     return res
-        // })
-        // .catch( err => console.error(err))
+        
+    },
+
+    projectLookUp: function(packet){
+        return axios.post("/api/projects/verify", packet)
     }
 
 };

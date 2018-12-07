@@ -16,10 +16,32 @@ module.exports={
     //lookupByProjectId  .then to return data and .catch to respond to your messup.
     lookupByProjectId: function (req, res){
         db.Entry
-        .find({projectName: req.params.id})
+        .find({projectSlug: req.params.id})
         .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err))       
-        }
+    },
+
+    verifyProject: function(req, res){
+        console.log(req.body, "<-req.body")
+        db.Project
+        .findOne({projectName: req.body.projectID,
+                password: req.body.password})
+        .then( result => res.json(result))
+        .catch( err => res.status(422).json(err))
+    },
+
+    projectExists: function (req, res){
+        db.Project
+        .findOne({projectName: req.body.projectName})
+        .then( result => {
+            if(result){
+                res.json(true)
+            } else {
+                res.json(false)
+            }
+            }
+        )
+    }
 
     
 }
