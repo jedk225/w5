@@ -67,10 +67,12 @@ const styles = StyleSheet.create({
 
   },
   listItem: {
-    backgroundColor: "#cfcfcf",
+    backgroundColor: "#c0deed",
     borderBottomWidth: 1,
     borderBottomColor: "#f0f0f0",
-    padding: 7.5
+    padding: 7.5,
+    marginBottom: 20,
+    marginTop: 10
   }
 
 });
