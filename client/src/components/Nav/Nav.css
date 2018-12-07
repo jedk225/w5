@@ -1,0 +1,10 @@
+.NavLogo {
+    font-family: 'Bungee Shade', cursive;
+    font-size: 35px;
+}
+
+.NavDescription {
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;
+    color: white!important;
+}
