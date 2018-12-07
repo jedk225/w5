@@ -73,6 +73,7 @@ class Inputs extends Component {
   }
   render() {
     return (
+     
       <View style={styles.container}>
 
       <View style={styles.buttonContainer}>

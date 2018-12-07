@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Alert, Platform, Text, View, StyleSheet, Button, TextInput } from 'react-native';
+import { Alert, Platform, Text, View, StyleSheet, Button, TextInput, KeyboardAvoidingView } from 'react-native';
 import { MapView, Constants, Location, Permissions } from 'expo';
 import Inputs from './inputs.js';
 import Api from '../utils/API';
@@ -68,60 +68,63 @@ export default class ProjectForm extends Component {
     return (
 
 
-      <View style={{ flex: 1 }}>
+      <KeyboardAvoidingView style={styles.container} behavior="position" enabled>
+        <View style={{ flex: 1 }}>
 
-        <View style={{ flex: .30 }}>
+          <View style={{ flex: .30 }}>
 
-          <Header
-            leftComponent={{ icon: 'menu', color: '#fff' }
-            }
-            centerComponent={item.projectName}
-            rightComponent={{ icon: 'home', color: '#fff' }}
-
-          />
-        </View>
-        {this.state.location && (
-          <MapView
-            style={{ flex: 1 }}
-            initialRegion={{
-              latitude: this.state.location.coords.latitude,
-              longitude: this.state.location.coords.longitude,
-              latitudeDelta: 0.0922,
-              longitudeDelta: 0.0421
-            }}
-
-          >
-            <MapView.Marker.Animated
-              ref={marker => { this.marker = marker }}
-              coordinate={this.state.coordinate}
-              onRegionChange={this.onRegionChange}
-              coordinate={{
+            <Header
+              leftComponent={{ icon: 'menu', color: '#fff' }
+              }
+              centerComponent={{text:item.projectName}}
+              rightComponent={{ icon: 'home', color: '#fff' }}
+            />
+          </View>
+          {this.state.location && (
+            <MapView
+              style={{ flex: 1 }}
+              initialRegion={{
                 latitude: this.state.location.coords.latitude,
                 longitude: this.state.location.coords.longitude,
-                timestamp: this.state.location
+                latitudeDelta: 0.0922,
+                longitudeDelta: 0.0421
               }}
-              // image={require('../assets/pin.png')}
 
-              draggable
-              onDragEnd={e => console.log(e.nativeEvent, this.timestamp)}
-              description={MapView.Marker.description}
-            />
+            >
+              <MapView.Marker.Animated
+                ref={marker => { this.marker = marker }}
+                coordinate={this.state.coordinate}
+                onRegionChange={this.onRegionChange}
+                coordinate={{
+                  latitude: this.state.location.coords.latitude,
+                  longitude: this.state.location.coords.longitude,
+                  timestamp: this.state.location
+                }}
+                // image={require('../assets/pin.png')}
+
+                draggable
+                onDragEnd={e => console.log(e.nativeEvent, this.timestamp)}
+                description={MapView.Marker.description}
+              />
 
 
-          </MapView>
+            </MapView>
 
 
-        )}
+          )}
 
-        <View style={{ flex: 1 }}>
-          <Inputs handleSubmit={
-            this.handleSubmit
-          } />
+          <View style={{ flex: 1 }}>
+            <Inputs handleSubmit={
+              this.handleSubmit
+            } />
+          </View>
+
+
+
         </View>
 
+      </KeyboardAvoidingView>
 
-
-      </View>
 
 
 
