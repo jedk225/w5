@@ -6,8 +6,8 @@ const NoMatch = () => (
   <Container fluid>
     <Row>
       <Col size="md-12">
-        <Jumbotron>
-          <h1>404 Page Not Found</h1>
+        <Jumbotron bgURL="/images/forest.jpg">
+          <h1 className="noMatchHeader">404 Page Not Found</h1>
           <h1>
             <span role="img" aria-label="Face With Rolling Eyes Emoji">
               🙄

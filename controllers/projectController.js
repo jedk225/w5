@@ -11,5 +11,15 @@ module.exports={
             res.send(projBundle)
         })
         .catch(err => res.status(422).json(err))
-    }
+    },
+
+    //lookupByProjectId  .then to return data and .catch to respond to your messup.
+    lookupByProjectId: function (req, res){
+        db.Entry
+        .find({projectName: req.params.id})
+        .then(dbModel => res.json(dbModel))
+        .catch(err => res.status(422).json(err))       
+        }
+
+    
 }

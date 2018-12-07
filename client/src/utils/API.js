@@ -11,6 +11,18 @@ export default {
     },
     createProject: function(projectData) {
         return axios.post("/api/projects", projectData)
+    },
+   
+    grabData: function(id) {
+        console.log("Got to utils/API", id)
+        let endPoint = "/" + id;
+        console.log(endPoint, "<--endPoint")
+        return axios.get(endPoint)
+        // .then( res => {
+        //     console.log(res, "res")
+        //     return res
+        // })
+        // .catch( err => console.error(err))
     }
 
 };

@@ -24,18 +24,19 @@ class Form extends Component {
     onChange(event){
         event.preventDefault();
         this.setState({[event.target.name] : event.target.value})
-        const Name = this.state.projectName;
+        const Name = event.target.value;
         const slug = this.nameSlug(Name);
         this.setState({projectSlug: slug})  
     }
 
     nameSlug(text){
         return text.toString().toLowerCase()
-              .replace(/\s+/g, '-')
-              .replace(/[^\w\-]+/g, '')
-              .replace(/\-\-+/g, '-')
-              .replace(/^-+/, '')
-              .replace(/-+$/, '');          
+        .replace(/\s+/g, '-')
+        .replace(/[^\w-]+/g, '')
+        .replace(/--+/g, '-')
+        .replace(/^-+/, '')
+        .replace(/-+$/, '')         
+       
     }    
     
     onSubmit(event){
@@ -60,9 +61,6 @@ class Form extends Component {
     render(){
         return(
     <div>
-        <h1>Project Name: {this.state.projectName}</h1>
-        <h2>Project Slug: {this.state.projectSlug}</h2>
-
         <form>
             <div className="form-group">
                 <label htmlFor="projectName">Project Name</label>

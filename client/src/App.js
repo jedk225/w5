@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch  } from "react-router-dom"
 import landingPage from "./pages/landingPage"
 import SetupProject from "./pages/setupProject"
+import Project from "./pages/project"
 import Nav from "./components/Nav"
 import noMatch from "./pages/noMatch"
 
@@ -47,7 +48,8 @@ updateProjectList = (project) => {
       <Nav />
       <Switch>
         <Route exact path="/" component={landingPage} />
-        <Route exact path="/setup" component={ () => <SetupProject updateProjectList={this.updateProjectList} />} />
+        <Route exact path="/setup" render={ () => <SetupProject updateProjectList={this.updateProjectList} />} />
+        <Route path="/:id" component={Project} />
         <Route component={noMatch} />
       </Switch>
     </div>

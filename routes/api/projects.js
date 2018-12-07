@@ -7,4 +7,10 @@ router.route("/")
     })
     .post(projectController.create)
 
+router.route("/:id")
+    .get( function(req, res){
+        projectController.lookUpByProjectId(req)
+    })
+    
+        
 module.exports = router;
