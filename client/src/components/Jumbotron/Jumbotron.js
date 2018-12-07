@@ -1,12 +1,17 @@
 import React from "react";
+import './Jumbotron.css';
 
-const Jumbotron = ({ children }) => (
-  <div
-    style={{ height: 300, clear: "both", paddingTop: 120, textAlign: "center" }}
-    className="jumbotron"
-  >
-    {children}
-  </div>
-);
+const Jumbotron = (props) => {
+  const jStyle = {
+    backgroundImage: `url(${props.bgURL})`,
+    backgroundRepeat: `no-repeat`,
+    backgroundSize: `cover`
+  }
+  return (
+    <div style={jStyle} className="jumbotron">
+      {props.children}
+    </div>
+  )
+};
 
 export default Jumbotron;

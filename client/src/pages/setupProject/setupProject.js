@@ -20,7 +20,7 @@ render(){
         <Container fluid>
         <Row>
           <Col size="md-12">
-            <Jumbotron>
+            <Jumbotron bgURL="/images/beach.jpg">
               <Link to={"/setupProject"}>
               <h1>Set up Project!</h1>
               </Link>
