@@ -9,6 +9,9 @@ import {
   Slider,
   Platform
 } from 'react-native';
+
+import { withNavigation } from 'react-navigation';
+
 import axios from 'axios';
 
 import {
@@ -53,7 +56,7 @@ const wbIcons = {
   incandescent: 'wb-incandescent',
 };
 
-export default class CameraScreen extends React.Component {
+class CameraScreen extends React.Component {
   static navigationOptions = {
     "header": null
   }
@@ -120,40 +123,41 @@ export default class CameraScreen extends React.Component {
 
 
 
+  // Stores the picture to cloudinary 
+  // storePicture = (uri) => {
+  //   console.log("Attempting to store picture");
+  //   const CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/w5/image/upload";
+  //   const CLAUDINARY_UPLOAD_PRESET = "gslrjwvq";
 
-  storePicture(uri) {
-    console.log("Attempting to store picture");
-    const CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/w5/image/upload";
-    const CLAUDINARY_UPLOAD_PRESET = "gslrjwvq";
+  //   let uriParts = uri.split('.');
+  //   let fileType = uriParts[uriParts.length - 1];
 
-    let uriParts = uri.split('.');
-    let fileType = uriParts[uriParts.length - 1];
+  //   let formData = new FormData();
+  //   formData.append('file', {
+  //     uri,
+  //     name: `photo.${fileType}`,
+  //     type: `image/${fileType}`,
+  //   });
 
-    let formData = new FormData();
-    formData.append('file', {
-      uri,
-      name: `photo.${fileType}`,
-      type: `image/${fileType}`,
-    });
+  //   formData.append('upload_preset', CLAUDINARY_UPLOAD_PRESET);
 
-    formData.append('upload_preset', CLAUDINARY_UPLOAD_PRESET);
+  //   axios({
+  //     url: CLOUDINARY_URL,
+  //     method: "POST",
+  //     headers: {
+  //       'Content-Type': 'application/x-www-form-urlencoded'
+  //     },
+  //     data: formData
+  //   }).then(function (res) {
+  //     this.props.navigation.state.params.photoGrab(res.data.secure_url, uri)
+  //     console.log("Successfuly stored picture")
+  //     console.log(res.data.secure_url)
 
-    axios({
-      url: CLOUDINARY_URL,
-      method: "POST",
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      data: formData
-    }).then(function (res) {
-      console.log("Successfuly stored picture")
-      console.log(res.data.secure_url)
-
-    }).catch(function (err) {
-      console.log("Failed to store pictures")
-      console.log(err)
-    })
-  }
+  //   }).catch(function (err) {
+  //     console.log("Failed to store pictures")
+  //     console.log(err)
+  //   })
+  // }
 
 
 
@@ -177,7 +181,7 @@ export default class CameraScreen extends React.Component {
 
     //VERY IMPORTANT
     //ADD THIS BACK IN SOMEWHERE LATER!!! IT SAVES OUR PIC TO CLOUDINARY!!!!!!!
-    //this.storePicture(newLocation);
+    this.props.navigation.state.params.storePicture(newLocation);
 
     this.props.navigation.goBack()
 
@@ -541,3 +545,5 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
 });
+
+export default withNavigation(CameraScreen) ;

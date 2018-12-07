@@ -20,6 +20,7 @@ export default class ProjectForm extends Component {
   handleSubmit = (comments, photo) => {
     //Api.submitForm(this.state.location);
 
+    // Saves location to database
     Api.saveLocation(this.state.location, comments, photo, "fx@gmail.com", this.props.navigation.state.params.item.projectSlug);
 
 
