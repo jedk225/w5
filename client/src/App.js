@@ -5,20 +5,55 @@ import SetupProject from "./pages/setupProject"
 import Nav from "./components/Nav"
 import noMatch from "./pages/noMatch"
 
-const App = () => {
+class App extends React.Component {
+  
+  state = {
+    projects: []
+  }
+  
+  componentDidMount(){
+    try{
+        const json = localStorage.getItem('projects');
+        const projects = JSON.parse(json);
+        if (projects) {
+            this.setState({ projects })
+        }
+    } catch (e){
+        //do nothing
+    }
+    
+}
+
+// componentDidUpdate(prevProps, prevState){
+//     if (prevState.projects.length !== this.state.projects.length){ 
+//         const json = JSON.stringify(this.state.projects);
+//         localStorage.setItem('projects', json);
+//     console.log('Saving Data')
+//     }
+// }
+
+updateProjectList = (project) => {
+  let joined = this.state.projects.concat(project)
+  let joinedString = JSON.stringify(joined)
+  localStorage.setItem('projects', joinedString);
+  console.log(joined, "<-joined")
+            this.setState({projects: joined})
+}
+  
+  render(){
   return(
     <Router>
     <div>
       <Nav />
       <Switch>
         <Route exact path="/" component={landingPage} />
-        <Route exact path="/setup" component={SetupProject} />
-        <Route path="/lookthisup" component={SetupProject} />
+        <Route exact path="/setup" component={ () => <SetupProject updateProjectList={this.updateProjectList} />} />
         <Route component={noMatch} />
       </Switch>
     </div>
     </Router>
   )
+}
 }
 
 export default App;

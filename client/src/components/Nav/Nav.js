@@ -9,6 +9,8 @@ const Nav = () => (
     <span className="NavDescription">
       who what when where why
     </span>
+    <input className="project" placeholder="Project Name"/>
+    <input className="password" placeholder="Password" />
   </nav>
 );
 
