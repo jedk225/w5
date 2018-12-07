@@ -6,39 +6,28 @@ import Jumbotron from "../../components/Jumbotron"
 // import { Input, TextArea, FormBtn } from "../../components/Form";
 // import { List, ListItem } from "../../components/List"
 // import DeleteBtn from "../../components/DeleteBtn"
-
+import './landingPage.css';
 class landingPage extends Component {
 
 
 
-render(){
-    return(
-        <Container fluid>
+
+  render() {
+    return (
+      <Container fluid>
+
         <Row>
           <Col size="md-12">
-            <Jumbotron>
+            <Jumbotron bgURL="/images/whale.jpg">
               <Link to={"/setup"}>
-              <h1>Sign Up for W5 project!</h1>
+                <h1 className="landingPageHeader">Sign Up for W5 project!</h1>
               </Link>
             </Jumbotron>
-            
           </Col>
         </Row>
-        <Row>
-          <Col size = "md-6">
-            <Jumbotron>
-            Left Side
-            </Jumbotron>
-          </Col>
-          <Col size = "md-6">
-            <Jumbotron>
-            Right Side
-            </Jumbotron>
-          </Col>
-        </Row>
-        </Container>
+      </Container>
     )
-}
+  }
 }
 
 export default landingPage

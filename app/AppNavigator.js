@@ -1,12 +1,12 @@
 import { createStackNavigator } from 'react-navigation';
 import Home from './views/Home';
-import UfoFinder from './views/UfoFinder';
-import WhaleSpotter from './views/WhaleSpotter';
-import Details from './views/Details';
-import inputs from './views/inputs';
-//import TakePicture from './views/TakePicture';
+// import UfoFinder from './views/UfoFinder';
+// import WhaleSpotter from './views/WhaleSpotter';
+// import Details from './views/Details';
+// import inputs from './views/inputs';
+import ProjectForm from './views/ProjectForm';
 
-//import Camera from './views/Camera';
+import Cam from './views/Cam';
 
 //import NavBar from './components/NavBar';
 
@@ -15,14 +15,16 @@ import inputs from './views/inputs';
 
 const AppNavigator = createStackNavigator({
   Home: { screen: Home },
-  UfoFinder: { screen: UfoFinder },
-  WhaleSpotter: { screen: WhaleSpotter },
-  Details: { screen: Details },
-  //TakePicture: { screen: TakePicture },
-  inputs: { screen: inputs }
+  ProjectForm: { screen: ProjectForm },
+  
+  // UfoFinder: { screen: UfoFinder },
+  // WhaleSpotter: { screen: WhaleSpotter },
+  // Details: { screen: Details },
+  // //TakePicture: { screen: TakePicture },
+  // inputs: { screen: inputs },
 
 
-  //Camera: { screen: Camera },
+  Cam: { screen: Cam },
 
 
   //NavBar: { screen: NavBar }

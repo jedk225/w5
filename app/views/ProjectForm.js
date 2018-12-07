@@ -1,58 +1,12 @@
 import React, { Component } from 'react';
-import { Platform, Text, View, StyleSheet, Button, TextInput } from 'react-native';
+import { Alert, Platform, Text, View, StyleSheet, Button, TextInput } from 'react-native';
 import { MapView, Constants, Location, Permissions } from 'expo';
-//import {
- // createStackNavigator,
- // createBottomTabNavigator
-//} from 'react-navigation';
-import Inputs from './views/inputs.js'
-import Api from './utils/API';
-//import SubmitButton from 'react-native-submit-button';
-
-/*
-import Home from './views/Home'
-import Favorites from './views/Favorites'
-import Details from './views/Details'
-
-const HomeStack = createStackNavigator({
-  HomeList: {
-    screen: Home,
-    navigationOptions: {
-      title: 'Search Movies'
-    }
-  },
-  Details: {
-    screen: Details,
-    navigationOptions: ({ navigation }) => ({
-      title: `${navigation.state.params.title}`
-    })
-  }
-})
-
-const FavoritesStack = createStackNavigator({
-  FavoritesList: {
-    screen: Favorites,
-    navigationOptions: {
-      title: 'Favorites'
-    }
-  },
-  FavoritesDetails: {
-    screen: Details,
-    navigationOptions: ({ navigation }) => ({
-      title: `${navigation.state.params.title}`
-    })
-  }
-})
-
-export default createBottomTabNavigator({
-  Home: { screen: HomeStack },
-  Favorites: { screen: FavoritesStack }
-})*/
+import Inputs from './inputs.js';
+import Api from '../utils/API';
+import { Header, Avatar } from 'react-native-elements';
 
 
-
-
-export default class App extends Component {
+export default class ProjectForm extends Component {
   constructor(props) {
     super(props);
     this.state = { text: 'Useless Placeholder' };
@@ -61,11 +15,14 @@ export default class App extends Component {
     location: null,
     errorMessage: null,
   };
+  welcome = () => {
+    Alert.alert(this.props.navigation.state.params.item.projectDescription);
+  }
 
- handleSubmit = (comments,photo) => {
- //Api.submitForm(this.state.location);
+  handleSubmit = (comments, photo) => {
+    //Api.submitForm(this.state.location);
 
- Api.saveLocation(this.state.location, comments, photo, "fx@gmail.com", "ufo spotter");
+    Api.saveLocation(this.state.location, comments, photo, "fx@gmail.com", this.props.navigation.state.params.item.projectSlug);
 
 
   }
@@ -102,11 +59,26 @@ export default class App extends Component {
     }
 
 
-    console.log(this.state.location);
+    //consoles soon as u page loads console.log(this.state.location);
     //to get the stamp just remove google mapviw.
+
+    const { item } = this.props.navigation.state.params
+
     return (
+
+
       <View style={{ flex: 1 }}>
 
+        <View style={{ flex: .30 }}>
+
+          <Header
+            leftComponent={{ icon: 'menu', color: '#fff' }
+            }
+            centerComponent={item.projectName}
+            rightComponent={{ icon: 'home', color: '#fff' }}
+
+          />
+        </View>
         {this.state.location && (
           <MapView
             style={{ flex: 1 }}
@@ -139,20 +111,11 @@ export default class App extends Component {
 
 
         )}
-        <View style={{ height: 50 }}>
 
-          <Button title="UFO SPOTTER"
-            onPress={this.handleSubmit}
-
-          />
-
-
-
-        </View>
-        <View style={{ height: -200 }}>
-        <Inputs handleSubmit={
-          this.handleSubmit
-        } />
+        <View style={{ flex: 1 }}>
+          <Inputs handleSubmit={
+            this.handleSubmit
+          } />
         </View>
 
 
@@ -179,21 +142,21 @@ const styles = StyleSheet.create({
     fontSize: 18,
     textAlign: 'center',
   },
- input: {
+  input: {
     margin: 15,
     height: 40,
     borderColor: '#7a42f4',
     borderWidth: 1
- },
- submitButton: {
+  },
+  submitButton: {
     backgroundColor: '#7a42f4',
     padding: 10,
     margin: 15,
     height: 40,
- },
- submitButtonText:{
+  },
+  submitButtonText: {
     color: 'white'
- }
+  }
 });
 
 
