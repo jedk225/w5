@@ -68,7 +68,7 @@ export default class ProjectForm extends Component {
     return (
 
 
-      <KeyboardAvoidingView style={styles.container} behavior="position" enabled>
+      <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
         <View style={{ flex: 1 }}>
 
           <View style={{ flex: .30 }}>
