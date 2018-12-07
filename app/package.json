@@ -9,6 +9,7 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@perrymitchell/react-native-prompt": "^1.1.0",
     "axios": "^0.18.0",
     "expo": "^31.0.2",
     "link": "^0.1.5",
