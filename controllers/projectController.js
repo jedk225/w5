@@ -35,7 +35,10 @@ module.exports={
         .findOne({projectName: req.body.projectName})
         .then( result => {
             if(result){
-                res.json(true)
+                res.json({
+                    projectName: result.projectName,
+                    projectDescription: result.projectDescription
+                })
             } else {
                 res.json(false)
             }

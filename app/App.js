@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, AsyncStorage } from 'react-native';
 import AppNavigator from './AppNavigator';
 import { Camera, Permissions } from 'expo';
 
@@ -9,20 +9,23 @@ export default class App extends React.Component {
     super(props)
     this.state = {
       possibleProjects: [],
-      currentProjects: [{
-        "key": "ufofinder will be a UID later",
-        "projectName": "UFO Finder",
-        "projectDescription": "ALIENS!!!!",
-        "projectSlug": "ufofinder"
-      },
-      {
-        "key": "ufwhalespotterofinder will be a UID later",
-        "projectName": "Whale Spotter",
-        "projectDescription": "I love Shamu!!",
-        "projectSlug": "whalespotter"
-      }]
+      currentProjects: []
     }
   }
+
+  async componentDidMount(){
+    try {
+        const json = await AsyncStorage.getItem('projects');
+        const projects = JSON.parse(json);
+        if (projects) {
+            this.setState({ currentProjects: projects })
+        }
+    } catch (e){
+        //do nothing
+    }
+    
+}
+
   addProject = (index) => {
     const {
       currentProjects,

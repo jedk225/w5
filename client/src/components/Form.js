@@ -24,7 +24,7 @@ class Form extends Component {
     onChange(event){
         event.preventDefault();
         this.setState({[event.target.name] : event.target.value})
-        if(event.target.name = "projectName"){
+        if(event.target.name === "projectName"){
             const Name = event.target.value;
             const slug = this.nameSlug(Name);
             this.setState({projectSlug: slug}) 
