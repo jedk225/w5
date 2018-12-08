@@ -147,6 +147,7 @@ class CameraScreen extends React.Component {
     console.log("\n-----------------------");
     console.log(photo);
     console.log("Photo Taken");
+    console.log("Attempting to store photo to Cloudinary Database")
     console.log("-----------------------\n");
 
   }

@@ -23,8 +23,7 @@ export default class ProjectForm extends Component {
     //Api.submitForm(this.state.location);
 
     // Saves location to database
-    Api.saveLocation(this.state.location, comments, photo, "fx@gmail.com", this.props.navigation.state.params.item.projectSlug);
-
+    Api.saveLocation(this.state.location, comments, photo, "", this.props.navigation.state.params.item.projectName);
 
   }
 

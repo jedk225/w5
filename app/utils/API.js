@@ -1,8 +1,4 @@
-// import axios from "axios"
 
-// export default{
-
-// }
 import axios from "axios";
 
 import { Constants } from "expo";
@@ -10,11 +6,11 @@ import { Constants } from "expo";
 const { manifest } = Constants;
 const apiHost =
     typeof manifest.packagerOpts === `object` && manifest.packagerOpts.dev
-        ? manifest.debuggerHost
+        ? 'http://' + manifest.debuggerHost
             .split(`:`)
             .shift()
             .concat(`:3030`)
-        : `api.example.com`;
+        : `https://wfive.herokuapp.com/`;
 
 export default {
     // Gets all Maps
@@ -29,8 +25,8 @@ export default {
         let latitude = mapData.coords.latitude;
         let longitude = mapData.coords.longitude;
         let date = new Date(mapData.timestamp);
-        let endPoint = "http://" + apiHost + "/api/maps/"
-        
+        let endPoint = apiHost + "/api/maps/"
+
         console.log("\n")
         console.log(`Latitude: ${latitude}`)
         console.log(`Longitude: ${longitude}`)
@@ -62,6 +58,18 @@ export default {
             });
 
 
+    },
+
+    getProject: (value) => {
+        let endPoint = apiHost + "/api/projects/projectexists"
+
+        return axios.post(endPoint, {
+            projectName: value
+        }).then(response => {
+            return response.data
+        }).catch(error => {
+            console.log(error)
+        })
     }
 
 };

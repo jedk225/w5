@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, AsyncStorage } from 'react-native';
 import AppNavigator from './AppNavigator';
 import { Camera, Permissions } from 'expo';
 
@@ -8,49 +8,49 @@ export default class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      possibleProjects: [],
-      currentProjects: [{
-        "key": "ufofinder will be a UID later",
-        "projectName": "UFO Finder",
-        "projectDescription": "ALIENS!!!!",
-        "projectSlug": "ufofinder"
-      },
-      {
-        "key": "ufwhalespotterofinder will be a UID later",
-        "projectName": "Whale Spotter",
-        "projectDescription": "I love Shamu!!",
-        "projectSlug": "whalespotter"
-      }]
+      currentProjects: []
     }
   }
-  addProject = (index) => {
+
+  componentDidMount() {
+    this.loadProjectFromStorage()
+  }
+
+  loadProjectFromStorage = async () => {
+    try {
+      const json = await AsyncStorage.getItem('projects');
+      const projects = JSON.parse(json);
+      if (projects) {
+        this.setState({ currentProjects: projects })
+      }
+    } catch (e) {
+      //do nothing
+    }
+  }
+
+  addProject = (project) => {
     const {
-      currentProjects,
-      possibleProjects,
+      currentProjects
     } = this.state
 
     // Pull Project out of possibleProjects
-    const addedProject = possibleProjects.splice(index, 1)
+    const newProjects = [...currentProjects, project];
 
-    // And put Project in currentProjects
-    currentProjects.push(addedProject)
-
-    // Finally, update our app state
     this.setState({
-      currentProjects,
-      possibleProjects,
+      currentProjects: newProjects
     })
+
+    AsyncStorage.setItem('projects', JSON.stringify(newProjects))
   }
 
   render() {
     return (
-   <AppNavigator
-          screenProps={ {
-            currentProjects: this.state.currentProjects,
-            possibleProjects: this.state.possibleProjects,
-            addProject: this.addProject,
-          } }
-        />
+      <AppNavigator
+        screenProps={{
+          currentProjects: this.state.currentProjects,
+          addProject: this.addProject,
+        }}
+      />
     );
   }
 }
