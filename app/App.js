@@ -8,52 +8,49 @@ export default class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      possibleProjects: [],
       currentProjects: []
     }
   }
 
-  async componentDidMount(){
-    try {
-        const json = await AsyncStorage.getItem('projects');
-        const projects = JSON.parse(json);
-        if (projects) {
-            this.setState({ currentProjects: projects })
-        }
-    } catch (e){
-        //do nothing
-    }
-    
-}
+  componentDidMount() {
+    this.loadProjectFromStorage()
+  }
 
-  addProject = (index) => {
+  loadProjectFromStorage = async () => {
+    try {
+      const json = await AsyncStorage.getItem('projects');
+      const projects = JSON.parse(json);
+      if (projects) {
+        this.setState({ currentProjects: projects })
+      }
+    } catch (e) {
+      //do nothing
+    }
+  }
+
+  addProject = (project) => {
     const {
-      currentProjects,
-      possibleProjects,
+      currentProjects
     } = this.state
 
     // Pull Project out of possibleProjects
-    const addedProject = possibleProjects.splice(index, 1)
+    const newProjects = [...currentProjects, project];
 
-    // And put Project in currentProjects
-    currentProjects.push(addedProject)
-
-    // Finally, update our app state
     this.setState({
-      currentProjects,
-      possibleProjects,
+      currentProjects: newProjects
     })
+
+    AsyncStorage.setItem('projects', JSON.stringify(newProjects))
   }
 
   render() {
     return (
-   <AppNavigator
-          screenProps={ {
-            currentProjects: this.state.currentProjects,
-            possibleProjects: this.state.possibleProjects,
-            addProject: this.addProject,
-          } }
-        />
+      <AppNavigator
+        screenProps={{
+          currentProjects: this.state.currentProjects,
+          addProject: this.addProject,
+        }}
+      />
     );
   }
 }

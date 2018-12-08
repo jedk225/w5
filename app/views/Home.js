@@ -2,6 +2,8 @@ import React from 'react';
 import { StyleSheet, Text, Alert, View, Button, FlatList, TouchableOpacity } from 'react-native';
 import Prompt from '@perrymitchell/react-native-prompt';
 import { Header } from 'react-native-elements';
+import API from '../utils/API';
+
 export default class Home extends React.Component {
 
   state = {
@@ -13,7 +15,6 @@ export default class Home extends React.Component {
     promptVisible: false,
     message: `You said "${value}"`
   })
-
 
   render() {
     return (
@@ -32,7 +33,7 @@ export default class Home extends React.Component {
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
           <View style={{ height: 80, justifyContent: 'flex-end' }}>
             <Text style={{ fontSize: 20 }} onPress={() => this.setState({ promptVisible: true })}>
-            Add to Existing Project
+              Add to Existing Project
           </Text>
           </View>
           <View style={{ flex: 1, justifyContent: 'center' }}>
@@ -43,16 +44,27 @@ export default class Home extends React.Component {
           <Prompt
             title="Add to Existing Project"
             placeholder="Project Name"
-            defaultValue= ""
+            defaultValue=""
             visible={this.state.promptVisible}
             onCancel={() => this.setState({
               promptVisible: false,
               message: "You cancelled"
             })}
-            onSubmit={(value) => this.setState({
-              promptVisible: false,
-              message: `Project name: ${value}`
-            })} />
+            onSubmit={(value) => {
+              API.getProject(value).then(project => {
+                  if (project) {
+                    this.props.screenProps.addProject(project)
+                  } else {
+                    console.log("Error: Unable to load Projects")
+                  }
+              })
+
+              this.setState({
+                promptVisible: false,
+                message: `Project name: ${value}`
+            
+              })
+            }} />
         </View>
 
         <FlatList

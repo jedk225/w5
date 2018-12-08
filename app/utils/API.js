@@ -1,8 +1,4 @@
-// import axios from "axios"
 
-// export default{
-
-// }
 import axios from "axios";
 
 import { Constants } from "expo";
@@ -30,7 +26,7 @@ export default {
         let longitude = mapData.coords.longitude;
         let date = new Date(mapData.timestamp);
         let endPoint = "http://" + apiHost + "/api/maps/"
-        
+
         console.log("\n")
         console.log(`Latitude: ${latitude}`)
         console.log(`Longitude: ${longitude}`)
@@ -62,6 +58,18 @@ export default {
             });
 
 
+    },
+
+    getProject: (value) => {
+        let endPoint = "http://" + apiHost + "/api/projects/projectexists"
+
+        return axios.post(endPoint, {
+            projectName: value
+        }).then(response => {
+            return response.data
+        }).catch(error => {
+            console.log(error)
+        })
     }
 
 };
