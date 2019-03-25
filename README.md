@@ -1,7 +1,7 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
 # W5
 React Native app that allows users to capture pertinent data for on-field events such as timestamp, location, photograph, an relevant comments
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
